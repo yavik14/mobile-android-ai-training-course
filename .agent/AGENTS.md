@@ -1,0 +1,2 @@
+- Cada vez crees código, crea un nuevo commit. Pero no hagas push si no te lo digo. 
+- Antes de cada commit, ejecuta la tarea `./gradlew :app:compileDebugKotlin` para asegurarte de que el código compila correctamente.
