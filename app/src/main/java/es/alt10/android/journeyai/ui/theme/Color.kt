@@ -23,9 +23,9 @@ val OnErrorLight = Color(0xFFFFFFFF)
 val ErrorContainerLight = Color(0xFFFFDAD6)
 val OnErrorContainerLight = Color(0xFF410002)
 
-val BackgroundLight = Color(0xFFF9FAEF)
+val BackgroundLight = Color(0xFFF2F0E6) // Bone color
 val OnBackgroundLight = Color(0xFF1A1C16)
-val SurfaceLight = Color(0xFFF9FAEF)
+val SurfaceLight = Color(0xFFF2F0E6) // Bone color
 val OnSurfaceLight = Color(0xFF1A1C16)
 
 // Dark Theme Palette
