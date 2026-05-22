@@ -133,7 +133,7 @@ fun JournalEntryCard(
                 Text(
                     text = entry.content,
                     style = MaterialTheme.typography.bodyLarge,
-                    maxLines = 3,
+                    maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
             }
