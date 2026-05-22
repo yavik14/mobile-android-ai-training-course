@@ -1,0 +1,4 @@
+<resources>
+
+    <style name="Theme.JourneyAI" parent="Theme.MaterialComponents.Light" />
+</resources>
