@@ -11,14 +11,18 @@ All commits should follow the Conventional Commits specification and include an 
 `<type>(<scope>): <emoji> <description>`
 
 ## Types and Emojis
-- `feat`: ✨ Features
+- `feature`: ✨ Features
 - `fix`: 🐛 Bug Fixes
 - `docs`: 📝 Documentation
 - `style`: 🎨 Styles and Formatting
 - `refactor`: ♻️ Code Refactoring
-- `perf`: ⚡ Performance Improvements
+- `performance`: ⚡ Performance Improvements
 - `test`: ✅ Testing
 - `build`: 🏗️ Build System or Dependencies
-- `ci`: 👷 Continuous Integration
 - `chore`: 🔧 Housekeeping tasks
 - `revert`: ⏪ Reversions
+
+## Additional rules
+- Keep the title concise.
+- Imperative description.
+- Use ! when break compatibility.
