@@ -51,7 +51,7 @@ fun JournalNavGraph(
         backStack = backStack,
         modifier = modifier,
         onBack = { backStack.removeLastOrNull() },
-        sceneStrategy = strategy,
+        sceneStrategies = listOf(strategy),
         entryDecorators = listOf(
             rememberSaveableStateHolderNavEntryDecorator(),
             rememberViewModelStoreNavEntryDecorator()
