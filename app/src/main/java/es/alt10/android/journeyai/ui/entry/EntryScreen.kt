@@ -12,9 +12,10 @@ import androidx.compose.material.icons.rounded.Done
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -28,7 +29,10 @@ fun EntryScreen(
     var showMoodMenu by remember { mutableStateOf(false) }
     val moods = listOf("Tranquil", "Energetic", "Happy", "Neutral", "Reflective", "Melancholy")
 
-    val dateFormatter = SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault())
+    val configuration = LocalConfiguration.current
+    val dateFormatter = remember(configuration) {
+        SimpleDateFormat("MMMM dd, yyyy", configuration.locales[0])
+    }
 
     Scaffold(
         modifier = modifier.fillMaxSize(),

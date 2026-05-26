@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -21,7 +22,7 @@ import coil.compose.AsyncImage
 import es.alt10.android.journeyai.data.model.JournalEntry
 import es.alt10.android.journeyai.ui.theme.JourneyAITheme
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -95,7 +96,10 @@ fun JournalEntryCard(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val dateFormatter = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
+    val configuration = LocalConfiguration.current
+    val dateFormatter = remember(configuration) {
+        SimpleDateFormat("MMM dd, yyyy", configuration.locales[0])
+    }
     val dateString = dateFormatter.format(Date(entry.date))
 
     OutlinedCard(
