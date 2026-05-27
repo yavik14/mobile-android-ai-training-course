@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<journey name="CreateNewEntryJourney">
+    <description xml:space="preserve">Cuando la aplicación se abra, deberá pulsar el botón más para crear una nueva entrada y luego verificar que la entrada se ha creado correctamente en la pantalla principal.</description>
+    <actions xml:space="preserve">
+        <action>Haz click en el fab con el icono + y espera a que el detalle esté abierto</action><action>Pon "Prueba Journey"</action><action>Pon "Esto es una prueba de un journey test"</action><action>Elige un mood aleatorio</action><action>Guarda y espera a que cargue el dashboard principal</action><action>Comprueba que aparece la nueva entrada en el dashboard principal</action>
+    </actions>
+</journey>
