@@ -10,6 +10,9 @@ import androidx.compose.material.icons.rounded.CalendarToday
 import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material.icons.rounded.Done
 import androidx.compose.material3.*
+import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
+import androidx.compose.material3.adaptive.layout.calculatePaneScaffoldDirective
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
@@ -17,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import java.text.SimpleDateFormat
 import java.util.Date
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3AdaptiveApi::class)
 @Composable
 fun EntryScreen(
     viewModel: EntryViewModel,
@@ -34,14 +37,20 @@ fun EntryScreen(
         SimpleDateFormat("MMMM dd, yyyy", configuration.locales[0])
     }
 
+    val adaptiveInfo = currentWindowAdaptiveInfo()
+    val directive = calculatePaneScaffoldDirective(adaptiveInfo)
+    val isMultiPane = directive.maxHorizontalPartitions > 1
+
     Scaffold(
         modifier = modifier.fillMaxSize(),
         topBar = {
             TopAppBar(
-                title = { Text(if (viewModel.title.isEmpty()) "New Entry" else viewModel.title) },
+                title = { Text(viewModel.title.ifEmpty { "New Entry" }) },
                 navigationIcon = {
-                    IconButton(onClick = onNavigateBack) {
-                        Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = "Back")
+                    if (!isMultiPane) {
+                        IconButton(onClick = onNavigateBack) {
+                            Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = "Back")
+                        }
                     }
                 },
                 actions = {

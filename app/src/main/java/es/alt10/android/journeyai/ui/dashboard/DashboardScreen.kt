@@ -1,9 +1,10 @@
 package es.alt10.android.journeyai.ui.dashboard
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.AutoStories
@@ -16,6 +17,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -33,9 +35,9 @@ fun DashboardScreen(
 ) {
     val entries by viewModel.entries.collectAsState()
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
-    val listState = rememberLazyListState()
+    val gridState = rememberLazyGridState()
     val isFabExpanded by remember {
-        derivedStateOf { listState.firstVisibleItemIndex == 0 }
+        derivedStateOf { gridState.firstVisibleItemIndex == 0 }
     }
 
     Scaffold(
@@ -46,7 +48,7 @@ fun DashboardScreen(
             LargeTopAppBar(
                 title = { Text("JourneyAI") },
                 scrollBehavior = scrollBehavior,
-                colors = TopAppBarDefaults.largeTopAppBarColors(
+                colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.background,
                     scrolledContainerColor = MaterialTheme.colorScheme.surfaceContainerLow,
                     titleContentColor = MaterialTheme.colorScheme.onBackground
@@ -67,8 +69,9 @@ fun DashboardScreen(
         if (entries.isEmpty()) {
             EmptyDashboard(modifier = Modifier.padding(innerPadding))
         } else {
-            LazyColumn(
-                state = listState,
+            LazyVerticalGrid(
+                columns = GridCells.Adaptive(minSize = 340.dp),
+                state = gridState,
                 modifier = Modifier
                     .fillMaxSize(),
                 contentPadding = PaddingValues(
@@ -77,6 +80,7 @@ fun DashboardScreen(
                     end = 16.dp,
                     bottom = innerPadding.calculateBottomPadding() + 16.dp
                 ),
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 items(entries) { entry ->
@@ -197,7 +201,13 @@ fun EmptyDashboard(modifier: Modifier = Modifier) {
     }
 }
 
-@Preview(showBackground = true)
+@Preview(name = "Phone", device = Devices.PHONE, showBackground = true)
+@Preview(name = "Foldable", device = Devices.FOLDABLE, showBackground = true)
+@Preview(name = "Tablet", device = Devices.TABLET, showBackground = true)
+@Preview(name = "Desktop", device = Devices.DESKTOP, showBackground = true)
+annotation class FormFactorPreviews
+
+@FormFactorPreviews
 @Composable
 fun JournalEntryCardPreview() {
     JourneyAITheme {
